@@ -1,0 +1,258 @@
+/* 局部作用域样式，避免全局污染 */
+.app-root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #f7f8fa;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  height: 56px;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  font-size: 18px;
+  font-weight: bold;
+  color: #222;
+}
+
+.app-title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.app-github {
+  color: #409eff;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.app-main {
+  display: flex;
+  height: calc(100vh - 60px);
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.app-editor {
+  flex: 1;
+  padding: 1rem;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.editor-textarea {
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-family: monospace;
+  resize: none;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.app-preview {
+  flex: 1;
+  padding: 1rem;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  position: relative;
+}
+
+.preview-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.preview-iframe {
+  width: 100%;
+  height: 100%;
+  border: 1px solid #ddd;
+  background-color: white;
+}
+
+.crop-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 2px dashed #ff4d4f;
+  background-color: rgba(255, 77, 79, 0.1);
+  pointer-events: none;
+}
+
+.app-settings {
+  width: 320px;
+  padding: 1rem;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.settings-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.settings-section h3 {
+  margin: 0;
+  font-size: 16px;
+  color: #333;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+.size-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.size-option {
+  padding: 1rem;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.size-option:hover {
+  border-color: #1890ff;
+}
+
+.size-option.active {
+  border-color: #1890ff;
+  background-color: rgba(24, 144, 255, 0.05);
+  box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+}
+
+.size-label {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 0.25rem;
+}
+
+.size-dimensions {
+  font-size: 14px;
+  color: #666;
+}
+
+.size-ratio {
+  font-size: 12px;
+  color: #999;
+}
+
+.btn-primary {
+  padding: 0.8rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  background-color: #1890ff;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  width: 100%;
+}
+
+.btn-primary:hover {
+  background-color: #096dd9;
+}
+
+.btn-cut {
+  margin-top: 1rem;
+}
+
+/* 错误消息样式 */
+.error-message {
+  background-color: #fff3cd;
+  color: #856404;
+  padding: 10px 15px;
+  border-radius: 6px;
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+}
+
+/* 导出预览样式 */
+.export-preview {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.export-preview h4 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #333;
+  font-size: 16px;
+}
+
+.export-images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 15px;
+  max-height: 200px;
+  overflow-y: auto;
+  padding: 5px;
+}
+
+.export-image-item {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid #ddd;
+}
+
+.export-image-thumbnail {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.export-image-index {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0,0,0,0.5);
+  color: white;
+  font-size: 12px;
+  padding: 2px 5px;
+}
+
+.export-actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* 处理中状态样式 */
+.btn-export:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+.btn-export:disabled:hover {
+  background-color: #cccccc;
+}
