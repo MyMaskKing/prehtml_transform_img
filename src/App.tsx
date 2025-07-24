@@ -7,7 +7,8 @@ import './App.css';
 function App() {
   const [html, setHtml] = useState('<h1>欢迎使用HTML在线预览工具</h1>');
   const [selectedSize, setSelectedSize] = useState({ id: 1, name: '竖图', width: 1080, height: 1440, ratio: '3:4' });
-  const [showCropArea, setShowCropArea] = useState(false);
+  const [customWidth, setCustomWidth] = useState(1080);
+  const [customHeight, setCustomHeight] = useState(1440);
   const [isProcessing, setIsProcessing] = useState(false);
   const [exportedImages, setExportedImages] = useState<string[]>([]);
   const [errorMessage, setErrorMessage] = useState('');
@@ -20,6 +21,7 @@ function App() {
     { id: 1, name: '竖图', width: 1080, height: 1440, ratio: '3:4' },
     { id: 2, name: '长图', width: 1080, height: 1920, ratio: '9:16' },
     { id: 3, name: '方图', width: 1080, height: 1080, ratio: '1:1' },
+    { id: 4, name: '自定义', width: customWidth, height: customHeight, ratio: '自定义' },
   ];
 
     // 处理iframe加载完成
@@ -266,7 +268,7 @@ function App() {
 
   // 处理切割区域预览
   const handleCropPreview = async (): Promise<boolean> => {
-    setShowCropArea(true);
+    
     // 生成预览图
     const canvases = await convertHtmlToImage();
     if (canvases.length > 0) {
@@ -492,11 +494,7 @@ function App() {
                   className="preview-iframe"
                   ref={previewRef}
                 />
-                {showCropArea && (
-                  <div className="crop-overlay"
-                    style={{ width: `${selectedSize.width}px`, height: `${selectedSize.height}px` }}
-                  />
-                )}
+                
               </div>
             </div>
             {/* 右侧：设置与导出区 */}
@@ -506,7 +504,7 @@ function App() {
                 <div className="size-options">
                   {sizeOptions.map(size => (
                     <div
-                      key={`${size.width}x${size.height}`}
+                      key={`${size.id}-${size.width}x${size.height}`}
                       className={`size-option ${selectedSize.id === size.id ? 'active' : ''}`}
                       onClick={() => setSelectedSize(size)}
                     >
@@ -515,6 +513,37 @@ function App() {
                       <div className="size-ratio">比例 {size.ratio}</div>
                     </div>
                   ))}
+                  {selectedSize.id === 4 && (
+                    <div className="custom-size-inputs">
+                      <input
+                        type="number"
+                        value={customWidth}
+                        onChange={(e) => setCustomWidth(Number(e.target.value))}
+                        placeholder="宽度"
+                        className="size-input"
+                      />
+                      <span>×</span>
+                      <input
+                        type="number"
+                        value={customHeight}
+                        onChange={(e) => setCustomHeight(Number(e.target.value))}
+                        placeholder="高度"
+                        className="size-input"
+                      />
+                      <button
+                        className="btn-apply-custom"
+                        onClick={() => setSelectedSize({
+                          id: 4,
+                          name: '自定义',
+                          width: customWidth,
+                          height: customHeight,
+                          ratio: `${customWidth}:${customHeight}`
+                        })}
+                      >
+                        应用
+                      </button>
+                    </div>
+                  )}
                 </div>
               </div>
               <div className="settings-section">
