@@ -38,12 +38,7 @@ function App() {
   }, [html]);
 
   // 解析HTML识别小红书容器
-  const parseXiaohongshuContainers = (html: string): HTMLElement[] => {
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(html, 'text/html');
-    // 使用类型断言确保返回HTMLElement数组
-    return Array.from(doc.getElementsByClassName('xiaohongshu-container')) as HTMLElement[];
-  };
+  // 已移除未使用的函数: parseXiaohongshuContainers;
 
   // 将单个容器转换为图片
   const convertContainerToImage = async (container: HTMLElement): Promise<HTMLCanvasElement> => {
@@ -131,8 +126,8 @@ function App() {
       useCORS: true,
       logging: false,
       allowTaint: true,
-      window: safeDoc.defaultView,
-      document: safeDoc as Document,
+
+
       onclone: (document) => {
         // 确保iframe变量在回调中可用
         const iframe = previewRef.current;
@@ -262,9 +257,7 @@ function App() {
   };
 
   // 生成导出预览图
-  const generateExportPreview = async (images: HTMLCanvasElement[]): Promise<void> => {
-    setExportedImages(images.map(canvas => canvas.toDataURL('image/png')));
-  };
+  // 已移除未使用的函数: generateExportPreview;
 
   // 处理切割区域预览
   const handleCropPreview = async (): Promise<boolean> => {
